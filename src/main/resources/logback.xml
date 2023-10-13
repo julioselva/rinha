@@ -1,0 +1,17 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] [%mdc] %-5level %logger{36}: %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.zaxxer.hikari" level="WARN"/>
+    <logger name="io.getquill" level="INFO"/>
+
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+    <!--    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>-->
+
+    <root level="${LOG_LEVEL:-INFO}">
+        <appender-ref ref="${LOG_FORMAT:-STDOUT}"/>
+    </root>
+</configuration>

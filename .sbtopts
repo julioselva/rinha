@@ -1,0 +1,5 @@
+-Dquill.binds.log=false
+-Dquill.query.tooLong=10000
+-Dquill.macro.log=false
+-Dquill.macro.log.pretty=true
+-Dquill.log.file=queries.sql
