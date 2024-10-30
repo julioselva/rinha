@@ -10,17 +10,16 @@ object ZRedis {
 
   type ZRedis = Redis
 
-  private val redisExecutor: ZLayer[Any, RedisError.IOError, RedisExecutor] =
-    ZLayer(ZIO.config[RedisConfig](ZConfig.config.map(_.redis)).orDie) >>> RedisExecutor.layer
+  private val redisConfig: ZLayer[Any, RedisError.IOError, RedisConfig] =
+    ZLayer(ZIO.config[RedisConfig](ZConfig.config.map(_.redis)).orDie)
 
   private val codecSupplier: ZLayer[Any, Nothing, CodecSupplier] =
     ZLayer.succeed[CodecSupplier](ProtobufCodecSupplier)
 
-  val layer: ZLayer[Any, RedisError.IOError, Redis] = (redisExecutor ++ codecSupplier) >>> Redis.layer
+  val layer: ZLayer[Any, RedisError.IOError, Redis] = (redisConfig ++ codecSupplier) >>> Redis.singleNode
 
 }
 
 object ProtobufCodecSupplier extends CodecSupplier {
   def get[A: Schema]: BinaryCodec[A] = ProtobufCodec.protobufCodec
-
 }

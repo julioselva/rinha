@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/rinha.iml" filepath="$PROJECT_DIR$/.idea/modules/rinha.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/rinha-build.iml" filepath="$PROJECT_DIR$/.idea/modules/rinha-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/rinha.rinha-build.iml" filepath="$PROJECT_DIR$/.idea/modules/rinha.rinha-build.iml" />
     </modules>
   </component>
 </project>

@@ -6,7 +6,7 @@
         <parameter value="-Wunused:imports" />
         <parameter value="-Ymacro-annotations" />
         <parameter value="-Yrangepos" />
-        <parameter value="-P:semanticdb:targetroot:/home/caju/Desktop/git/rinha/target/scala-2.13/meta" />
+        <parameter value="-P:semanticdb:targetroot:/home/julioselva/Desktop/git/rinha/target/scala-2.13/meta" />
       </parameters>
       <plugins>
         <plugin path="$USER_HOME$/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scalameta/semanticdb-scalac_2.13.12/4.8.10/semanticdb-scalac_2.13.12-4.8.10.jar" />

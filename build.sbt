@@ -10,6 +10,8 @@ ThisBuild / organizationName := "Selva"
 ThisBuild / semanticdbEnabled := true
 ThisBuild / semanticdbVersion := scalafixSemanticdb.revision
 
+ThisBuild / scalafixScalaBinaryVersion := "2.13"
+
 lazy val root = (project in file("."))
   .settings(
     name          := "rinha",
@@ -24,10 +26,11 @@ lazy val root = (project in file("."))
       "dev.zio"       %% "zio-config-refined"    % "4.0.0-RC16",
       "dev.zio"       %% "zio-logging"           % "2.1.14",
       "dev.zio"       %% "zio-logging-slf4j2"    % "2.1.14",
-      "dev.zio"       %% "zio-redis"             % "0.2.0",
-      "dev.zio"       %% "zio-schema"            % "0.4.9",
-      "dev.zio"       %% "zio-schema-protobuf"   % "0.4.9",
-      "dev.zio"       %% "zio-schema-derivation" % "0.4.9",
+      "dev.zio"       %% "zio-redis"             % "1.0.0",
+      "dev.zio"       %% "zio-schema"            % "1.5.0",
+      "dev.zio"       %% "zio-schema-json"       % "1.5.0",
+      "dev.zio"       %% "zio-schema-protobuf"   % "1.5.0",
+      "dev.zio"       %% "zio-schema-derivation" % "1.5.0",
       "ch.qos.logback" % "logback-classic"       % "1.4.7",
       "io.getquill"   %% "quill-jdbc-zio"        % "4.8.0",
       "org.postgresql" % "postgresql"            % "42.3.1",

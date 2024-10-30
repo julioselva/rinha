@@ -1,7 +1,7 @@
 package modules.person.adapter.driver
 
 import modules.person.core.driver.CreatingPersonBatch
-import zio.{Schedule, ZIO, durationInt}
+import zio._
 
 object PersonJobs {
 

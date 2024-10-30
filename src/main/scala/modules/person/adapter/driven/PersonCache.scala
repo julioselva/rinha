@@ -3,13 +3,14 @@ package modules.person.adapter.driven
 import lib.zredis.ZRedis.ZRedis
 import modules.person.core.driven.PersonCachePort
 import modules.person.infra.Person
-import modules.person.infra.Person.personSchema
 import zio.redis.RedisError
 import zio.{ZIO, ZLayer}
 
 import java.util.UUID
 
 class PersonCacheAdapter(redis: ZRedis) extends PersonCachePort {
+
+  import modules.person.infra.Person.personSchema
 
   override def set(person: Person): ZIO[Any, RedisError, Unit] =
     redis.set(s"person.${person.id}", person).unit

@@ -29,21 +29,23 @@ object Main extends ZIOAppDefault {
       TypesafeConfigProvider.fromResourcePath(),
     )
 
-  private val serverApis = (cfg: HttpConfig) =>
+  private val serverApis = (cfg: HttpConfig) => {
+
+    val serverLayer: ZLayer[Any, Throwable, Server] =
+      Server.defaultWith {
+        _.port(cfg.port)
+          .keepAlive(true)
+          .noIdleTimeout
+          .logWarningOnFatalError(true)
+      }
+
     ZIO.log("Starting Http application") *>
       Server
         .serve {
-          {
-            (HealthApi() ++ PersonApi()) @@ RequestHandlerMiddlewares.debug
-          }.withDefaultErrorLogging.withDefaultErrorResponse
+          (HealthApi() ++ PersonApi()).withDefaultErrorResponse.withDefaultErrorLogging
         }
         .provideSome[PersonQueuePort](
-          Server.defaultWith {
-            _.port(cfg.port)
-              .keepAlive(true)
-              .noIdleTimeout
-              .logWarningOnFatalError(true)
-          },
+          serverLayer,
           Scope.default,
           ZUUID.layer,
           ZDataSource.layer,
@@ -57,6 +59,7 @@ object Main extends ZIOAppDefault {
           GetPersonLength.layer,
           PersonRepository.layer,
         )
+  }
 
   private val serverJobs =
     ZIO.log("Starting background jobs") *>
@@ -84,7 +87,7 @@ object Main extends ZIOAppDefault {
       ||_|_\___||_|\_|_||_/_/ \_\
       |""".stripMargin
 
-  override val run = {
+  override val run: ZIO[Any, Any, Unit] = {
     val start =
       for {
         _      <- ZIO.log(serverArt)
